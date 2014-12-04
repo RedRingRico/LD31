@@ -98,6 +98,7 @@ namespace LD
 
 		glGenTextures( 1, &m_DepthTexture );
 
+
 		for( LD_MEMSIZE i = 0;
 			i < sizeof( m_GBuffer ) / sizeof( m_GBuffer[ 0 ] ); ++i )
 		{
@@ -156,7 +157,12 @@ namespace LD
 
 		glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );
 
+		glDepthMask( GL_TRUE );
+
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		glEnable( GL_DEPTH_TEST );
+		glDisable( GL_BLEND );
 
 		return LD_OK;
 	}
@@ -188,7 +194,22 @@ namespace LD
 		glBlitFramebuffer( 0, 0, 800, 600, HalfWidth, 0, 800, HalfHeight, 
 			GL_COLOR_BUFFER_BIT, GL_LINEAR );
 
+		glDepthMask( GL_FALSE );
+
+		glDisable( GL_DEPTH_TEST );
+
 		glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+	}
+
+	LD_UINT32 Renderer::BeginLightPass( )
+	{
+		glEnable( GL_BLEND );
+		glBlendEquation( GL_FUNC_ADD );
+		glBlendFunc( GL_ONE, GL_ONE );
+
+		glBindFramebuffer( GL_DRAW_FRAMEBUFFER, m_Framebuffer );
+
+		glClear( GL_COLOR_BUFFER_BIT );
 	}
 
 	LD_UINT32 Renderer::RegisterPolygons( const LD_MEMSIZE p_VertexCount,

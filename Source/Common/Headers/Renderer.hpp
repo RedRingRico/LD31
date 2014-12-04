@@ -18,6 +18,11 @@ namespace LD
 		GBUFFER_TOTAL
 	};
 
+	typedef struct _tagVERTEX_POSITION
+	{
+		LD_FLOAT32 X, Y, Z;
+	}VERTEX_POSITION,*PVERTEX_POSITION;
+
 	class Renderer
 	{
 	public:
@@ -33,6 +38,8 @@ namespace LD
 
 		LD_UINT32 GBufferBegin( );
 		void GBufferEnd( );
+
+		LD_UINT32 BeginLightPass( );
 
 		LD_UINT32 RenderPolygons( const LD_UINT32 p_CacheID );
 

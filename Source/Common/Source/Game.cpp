@@ -54,8 +54,6 @@ namespace LD
 		SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
 		SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
 
-
-
 		m_pWindow = SDL_CreateWindow( "Red Ring Rico's LD31 Entry",
 			0, 0, 800, 600, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL );
 
