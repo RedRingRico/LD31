@@ -2,9 +2,12 @@
 #include <PolygonCache.hpp>
 #include <Memory.hpp>
 #include <iostream>
+#include <BoundingSphere.hpp>
 
 namespace LD
 {
+	BoundingSphere g_Sphere;
+
 	Renderer::Renderer( ) :
 		m_pWindow( LD_NULL ),
 		m_GLContext( LD_NULL ),
@@ -181,7 +184,7 @@ namespace LD
 		GLsizei HalfWidth = 400;
 		GLsizei HalfHeight = 300;
 
-		glReadBuffer( GL_COLOR_ATTACHMENT0 );
+	/*	glReadBuffer( GL_COLOR_ATTACHMENT0 );
 		glBlitFramebuffer( 0, 0, 800, 600,
 			0, HalfHeight, 400, 600,
 			GL_COLOR_BUFFER_BIT, GL_LINEAR );
@@ -192,13 +195,16 @@ namespace LD
 
 		glReadBuffer( GL_COLOR_ATTACHMENT2 );
 		glBlitFramebuffer( 0, 0, 800, 600, HalfWidth, 0, 800, HalfHeight, 
-			GL_COLOR_BUFFER_BIT, GL_LINEAR );
+			GL_COLOR_BUFFER_BIT, GL_LINEAR );*/
 
 		glDepthMask( GL_FALSE );
 
 		glDisable( GL_DEPTH_TEST );
 
 		glBindFramebuffer( GL_FRAMEBUFFER, 0 );
+
+		// TESTING!
+		g_Sphere.Render( *this );
 	}
 
 	LD_UINT32 Renderer::BeginLightPass( )
@@ -210,6 +216,7 @@ namespace LD
 		glBindFramebuffer( GL_DRAW_FRAMEBUFFER, m_Framebuffer );
 
 		glClear( GL_COLOR_BUFFER_BIT );
+
 	}
 
 	LD_UINT32 Renderer::RegisterPolygons( const LD_MEMSIZE p_VertexCount,

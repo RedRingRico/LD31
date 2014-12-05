@@ -155,7 +155,7 @@ namespace LD
 			View.CreateViewLookAt( EyePosition, LookPoint, WorldUp );
 
 			Rotate += 0.01f;
-			WorldRotateZ.RotateZ( Rotate );
+			WorldRotateZ.RotateY( Rotate );
 
 			View.GetAsFloatArray( ViewRaw );
 			Projection.GetAsFloatArray( ProjectionRaw );
